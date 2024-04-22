@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="style.css">
+<title>Calculadora de Idades</title>
+</head>
+<body>
+<div class="container">
+    <h2>Calculadora de Idades</h2>
+    <label for="idadeInput">Digite uma idade:</label>
+    <input type="number" id="idadeInput">
+    <button onclick="adicionarIdade()">Adicionar Idade</button>
+    <div id="resultado"></div>
+</div>
+
+<script>
+    let idades = [];
+
+    function adicionarIdade() {
+        const inputIdade = document.getElementById("idadeInput");
+        const idade = parseInt(inputIdade.value);
+
+        if (!isNaN(idade)) {
+            idades.push(idade);
+            inputIdade.value = ""; // Limpar o campo de entrada
+            mostrarResultado();
+        } else {
+            alert("Por favor, insira uma idade válida.");
+        }
+    }
+
+    function mostrarResultado() {
+        const totalIdades = idades.length;
+        const somaIdades = idades.reduce((total, idade) => total + idade, 0);
+        const maiorIdade = Math.max(...idades);
+
+        const resultadoDiv = document.getElementById("resultado");
+        resultadoDiv.innerHTML = `
+            <p>Quantidade de idades digitadas: ${totalIdades}</p>
+            <p>Soma de todas as idades: ${somaIdades}</p>
+            <p>Maior idade digitada: ${maiorIdade}</p>
+        `;
+    }
+</script>
+</body>
+</html>
